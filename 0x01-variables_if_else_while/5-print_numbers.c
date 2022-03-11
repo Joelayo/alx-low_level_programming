@@ -12,6 +12,7 @@ int main(void)
 	while (a >= 9)
 	{
 		printf("%i\n", a);
+		a++;
 	}
 	return (0);
 }
