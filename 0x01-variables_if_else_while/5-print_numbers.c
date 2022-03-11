@@ -7,9 +7,9 @@
  */
 int main(void)
 {
-	int a = 0;
+	int a;
 
-	while (a >= 9)
+	while (a < 10)
 	{
 		printf("%i\n", a);
 		a++;
