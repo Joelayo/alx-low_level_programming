@@ -19,6 +19,7 @@ int main(void)
 	while (b < 'g')
 	{
 		putchar(b);
+		b++;
 	}
 	putchar('\n');
 	return (0);
