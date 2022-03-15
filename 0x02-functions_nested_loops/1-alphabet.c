@@ -1,20 +1,15 @@
+#include "main.h"
 /**
- * main - Entry point
- *
- * Description: prints _putchar using putchar prototype
- *
- * Return: Always 0 (Success)
+* print_alphabet - prints the alphabet
+*
 */
-
 void print_alphabet(void)
 {
-	char ch;
-	ch = 'a';
-	while (ch <= 'z')
-	{
-		_putchar(ch);
-		ch++
-	}
+	int x;
 
-	_putchar("\n");
+	for (x =  97; x <= 122; x++)
+		_putchar(x);
+
+	_putchar('\n');
+
 }
