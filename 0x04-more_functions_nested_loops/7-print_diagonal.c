@@ -24,6 +24,6 @@ void print_diagonal(int n)
 		c++;
 		n--;
 	}
-	if (c == 0)
+	if (c < 1)
 		_putchar('\n');
 }
