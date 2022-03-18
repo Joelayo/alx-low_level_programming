@@ -1,38 +1,33 @@
-#include "main.h"
+#include "holberton.h"
+
 /**
- * main - entry point
- *
- * Return: void
+ * print_triangle - print a triangle aligned right, using '#'
+ * @size: Size of triangle
  */
-
-int main(void)
+void print_triangle(int size)
 {
-	int j = 100;
-	int i;
+	int c, i, j;
 
-	i = 1;
-	while (i <= j)
+	c = 0;
+	i = size - 1;
+	while (c < size)
 	{
-		if (i % 3 == 0 && i % 5 == 0)
+		i = size - 1 - c;
+		j = c + 1;
+		while (i > 0)
 		{
-			printf("FizzBuzz");
+			_putchar(' ');
+			i--;
 		}
-		else if (i % 3 == 0)
+		while (j > 0)
 		{
-			printf("Fizz");
+			_putchar('#');
+			j--;
 		}
-		else if (i % 5 == 0)
-		{
-			printf("Buzz");
-		}
-		else
-		{
-			printf("%i", i);
-		}
-		if (i != 100)
-		printf(" ");
-	i++;
+		_putchar('\n');
+		c++;
 	}
-	printf("\n");
-	return (0);
+
+	if (size <= 0)
+		_putchar('\n');
 }
