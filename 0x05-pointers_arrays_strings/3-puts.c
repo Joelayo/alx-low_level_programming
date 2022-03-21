@@ -1,16 +1,16 @@
 #include "main.h"
 
 /**
- * puts - prints string + newline to stdout
- * str: String variable
- * Return: no return
+ * _puts - print a string to stdout
+ * @str: char array string type
+ * Description: Can only use _putchar
  */
 
 void _puts(char *str)
 {
 	int a = 0;
 
-	while(str[a])
+	while (str[a])
 	{
 		_putchar(str[a]);
 		a++;
