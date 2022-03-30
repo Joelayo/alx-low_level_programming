@@ -1,74 +1,68 @@
 #include "main.h"
 
 /**
- * wildcmp - compares two strings and returns 1
- * if the strings can be considered identical.
- * @s1: string
- * @s2: string
- * Return: Always 0.
+ * move_past_star - iterates past asterisk
+ * @s2: the second string, can contain wildcard
+ *
+ * Return: the pointer past star
  */
-
-int wildcmp(char *s1, char *s2)
+char *move_past_star(char *s2)
 {
-return (checker(s1, s2, 0, 0, -1));
+	if (*s2 == '*')
+		return (move_past_star(s2 + 1));
+	else
+		return (s2);
 }
 
 /**
- * checker - helper
- * @s1: string
- * @s2: string
- * @a: int
- * @b: int
- * @wildUsed: int
- * Return: Always 0.
+ * inception - makes magic a reality
+ * @s1: the first string
+ * @s2: the second string, can contain wildcard
+ *
+ * Return: 1 if identical, 0 if false
  */
-int checker(char *s1, char *s2, int a, int b, int wildUsed)
+int inception(char *s1, char *s2)
 {
+	int ret = 0;
 
-/*printf("s1 <%c> a <%i> s2 <%c> b <%i> \n", s1[a], a, s2[b], b);*/
-
-if (s1[a] != '\0')
-{	
-	if (s2[b] == '\0')
+	if (*s1 == 0)
 		return (0);
-	else if (s2[b] == '*')
-	{
-		if (s2[b + 1] == '*'){
-			/*printf("Pass 1\n");*/
-			return (checker(s1, s2, a, b + 1, b));
-		}
-		else if (s2[b + 1] == s1[a]){
-			/*printf("Pass 2\n");*/
-			return (checker(s1, s2, a, b + 1, b));
-		}	
-		else if (s1[a + 1] != s2[b + 1]){
-			/*printf("Pass 3\n");*/
-			return (checker(s1, s2, a + 1, b, b));	
-		}
-		else if (s1[a + 1] == s2[b + 1]){
-			/*printf("Pass 3\n");*/
-			return (checker(s1, s2, a + 1, b + 1, b));	
-		}
-		
-	}
-	else if ((s1[a] == s2[b]) || (s2[b] == '*' && s2[b + 1] == s1[a + 1])){
-		/*printf("Pass 4\n");*/
-		return (checker(s1, s2, a + 1, b + 1, wildUsed));
-	}
-	else
-	{
-		if (wildUsed == -1)
-		{
-			/*printf("No wild card\n");*/
-			return (0);
-		}
-		/*printf("Back to wildcard\n");*/
-		return (checker(s1, s2, a, wildUsed, wildUsed));
-	}
+	if (*s1 == *s2)
+		ret += wildcmp(s1 + 1, s2 + 1);
+	ret += inception(s1 + 1, s2);
+	return (ret);
 }
-if (s2[b] != '\0')
-	return 0;
 
-return (1);
+/**
+ * wildcmp - compares two strings lexicographically
+ * @s1: the first string
+ * @s2: the second string, can contain wildcard
+ *
+ * Return: 1 if identical, 0 if false
+ */
+int wildcmp(char *s1, char *s2)
+{
+	int ret = 0;
 
+	if (!*s1 && *s2 == '*' && !*move_past_star(s2))
+		return (1);
+	if (*s1 == *s2)
+	{
+		if (!*s1)
+			return (1);
+		return (wildcmp(s1 + 1, *s2 == '*' ? s2 : s2 + 1));
+	}
+	if (!*s1 || !s2)
+		return (0);
+	if (*s2 == '*')
+	{
+		s2 = move_past_star(s2);
+		if (!*s2)
+			return (1);
+		if (*s1 == *s2)
+			ret += wildcmp(s1 + 1, s2 + 1);
+		ret += inception(s1, s2);
+		return (!!ret);
+	}
+	return (0);
 }
