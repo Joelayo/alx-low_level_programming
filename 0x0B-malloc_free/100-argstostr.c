@@ -17,6 +17,53 @@ return (size);
 }
 
 /**
+ * *str_concat - concatenates two strings
+ * @s1: string 1
+ * @s2: string 2
+ * Return: pointer
+ */
+
+char *str_addChar (char *str, char c)
+{
+int size, i;
+char *m;
+
+size = _strlen(str);
+
+m = malloc((size + 1) * sizeof(char) + 1);
+if (m == 0)
+	return (0);
+
+for (i = 0; i <= size; i++)
+	m[i] = str[i];
+
+m[i + 1] = c;
+m[i + 2] = '\0';
+
+return (m);
+}
+
+
+/**
+ * *nbr_spaces - return the number of occurent of a string
+ * @s: string to check
+ * Return: int
+ */
+
+unsigned int nbr_spaces(char *s)
+{
+	int i, cmpt = 0;
+
+	for (i = 0; s[i + 1] != '\0'; i++)
+	{
+		if (s[i]  == ' ' && s[i + 1] != ' ')
+			cmpt++;
+	}
+
+	return (cmpt + 1);
+}
+
+/**
  * *argstostr - description
  * @ac: int
  * @av: arguments
