@@ -6,36 +6,33 @@
  * Description: Each element of the grid should be initialized to 0.
  * @width: int size width
  * @height: int size height
- * Return: Pointer to new grid
+ * Return: Pointer to the 2D array
  */
 
 int **alloc_grid(int width, int height)
 {
-	int **grid, i, j;
+	int i, j;
+	int **a;
 
-	grid = malloc(sizeof(*grid) * height);
-
-	if (width <= 0 || height <= 0 || grid == 0)
+	if (width <= 0 || height <= 0)
 		return (NULL);
-
-else
-{
+	a = (int **)malloc(sizeof(int *) * height);
+	if (a == NULL)
+		return (NULL);
 	for (i = 0; i < height; i++)
 	{
-		tab[i] = malloc(sizeof(**grid) * width);
-		if (grid[i] == 0)
+		a[i] = (int *)malloc(sizeof(int) * width);
+		if (a[i] == NULL)
 		{
-			/*Free everything if malloc fails*/
-			while (i--)
-				free(grid[i]);
-			free(grid);
+			for (j = 0; j < i; j++)
+				free(a[j]);
+			free(a);
 			return (NULL);
 		}
-
 		for (j = 0; j < width; j++)
-			grid[i][j] = 0;
+		{
+			a[i][j] = 0;
+		}
 	}
-}
-
-return (grid);
+	return (a);
 }
