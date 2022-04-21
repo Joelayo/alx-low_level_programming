@@ -17,5 +17,5 @@ main:
 	syscall
 
 section .data
-	message db "Hello, Holberton", 13,10,0xA
+	message db "Hello, Holberton",0xA
 	msglen equ $-message
