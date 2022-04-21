@@ -1,12 +1,18 @@
+global main
+
 section .text
-	global main
+
 main:
-	mov ebx,1
-	mov ecx,msg
-	mov edx,17
-	mov eax,4
-	int 0x80
-	mov eax,0
-	int 0x80
+	mov rax, 0x1
+	mov rdi, 0x1
+	mov rsi, message
+	mov rdx, msglen
+	syscall
+
+	mov rax, 0x3c
+	mov rdi, 0x2
+	syscall
+
 section .data
-	msg db 'Hello, Holberton',0xa
+	message db "Hello, Holberton",0xA
+	msglen equ $-message
