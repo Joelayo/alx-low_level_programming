@@ -1,3 +1,6 @@
+; Filename: 101-hello_holberton.asm
+; Author: Joel Oduyemi
+
 global main
 
 section .text
@@ -14,5 +17,5 @@ main:
 	syscall
 
 section .data
-	message db "Hello, Holberton",0xA
+	message db "Hello, Holberton", 13,10,0xA
 	msglen equ $-message
